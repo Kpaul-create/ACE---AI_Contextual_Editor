@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { palette, glass } from "./src/tokens";
 
 const config: Config = {
   content: [
@@ -8,14 +9,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        canvas: "#0b0c0e",
-        panel: "#111316",
-        line: "#25282d",
-        accent: "#c6f36b",
+        canvas:  palette.canvas,
+        panel:   palette.panel,
+        line:    palette.line,
+        accent:  palette.accent,
+        "surface-bg":     glass.bgTw,
+        "surface-border": glass.borderTw,
       },
       fontFamily: {
         sans: ["var(--font-sans)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
+      },
+      backdropBlur: {
+        glass: glass.blurTw,
+      },
+      boxShadow: {
+        glass: glass.shadowTw,
+      },
+      borderRadius: {
+        window: glass.radiusTw,
       },
     },
   },

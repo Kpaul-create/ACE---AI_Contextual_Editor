@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node -e \"const fs=require('fs');fs.copyFileSync('node_modules/esbuild-wasm/esbuild.wasm','public/esbuild.wasm');fs.copyFileSync('node_modules/esbuild-wasm/esm/browser.min.js','public/esbuild-browser.min.js');fs.copyFileSync('node_modules/@sqlite.org/sqlite-wasm/dist/sqlite3.wasm','public/sqlite3.wasm');fs.copyFileSync('node_modules/@sqlite.org/sqlite-wasm/dist/sqlite3-opfs-async-proxy.js','public/sqlite3-opfs-async-proxy.js');\"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
@@ -11,16 +12,23 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.31.9",
+    "@clerk/ui": "^1.40.0",
+    "@huggingface/transformers": "^4.3.1",
     "@monaco-editor/react": "^4.7.0",
     "@radix-ui/react-dialog": "^1.1.15",
+    "@sqlite.org/sqlite-wasm": "^3.53.4-build2",
     "@tiptap/react": "^3.4.1",
     "@tiptap/starter-kit": "^3.4.1",
+    "@webcontainer/api": "^1.6.4",
     "clsx": "^2.1.1",
+    "esbuild-wasm": "^0.28.2",
     "lucide-react": "^0.468.0",
     "next": "^15.5.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tailwind-merge": "^3.3.1",
+    "y-webrtc": "^10.3.0",
+    "yjs": "^13.6.33",
     "zustand": "^5.0.8"
   },
   "devDependencies": {

@@ -1,0 +1,38 @@
+{
+  "name": "ace-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "RAG 2.0 backend for the ACE contextual editor (Fastify + Supabase/pgvector + FIM).",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node20 --format=esm --packages=external --outfile=dist/index.js",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@clerk/fastify": "^2.4.9",
+    "@fastify/cors": "^10.0.1",
+    "@supabase/supabase-js": "^2.45.4",
+    "fastify": "^5.1.0",
+    "pino-pretty": "^13.0.0",
+    "puppeteer": "^25.13.0",
+    "svix": "^1.37.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "esbuild": "^0.24.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "allowScripts": {
+    "puppeteer@25.13.0": true
+  }
+}

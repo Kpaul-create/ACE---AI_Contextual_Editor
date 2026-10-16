@@ -1,51 +1,112 @@
 @import "tailwindcss";
 @config "../tailwind.config.ts";
 
+/* ─── Design tokens ──────────────────────────────────────────────────────────
+   Values are kept in sync with src/tokens.ts (single source of truth).
+   Do NOT edit raw values here — edit tokens.ts and mirror the change.
+   ─────────────────────────────────────────────────────────────────────────── */
 :root {
   color-scheme: dark;
+
+  /* palette */
   --background: #0b0c0e;
   --foreground: #e7e9ec;
-  --muted: #858a93;
-  --line: #25282d;
-  --accent: #c6f36b;
+  --muted:      #858a93;
+  --line:       #25282d;
+  --accent:     #c6f36b;
+
+  /* traffic-light */
+  --tl-close:    #ff5f57;
+  --tl-minimise: #febc2e;
+  --tl-maximise: #28c840;
+
+  /* typography */
   --font-sans: Arial, Helvetica, sans-serif;
-  --font-mono: "SFMono-Regular", Consolas, monospace;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* glass surface */
+  --surface-bg:           rgba(30, 22, 44, 0.62);
+  --surface-bg-solid:     #1a1525;
+  --surface-border:       rgba(255, 255, 255, 0.12);
+  --surface-border-bright:rgba(255, 255, 255, 0.22);
+  --surface-blur:         20px;
+  --surface-shadow:       0 4px 24px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.06) inset;
+  --surface-radius:       0.625rem;
+
+  /* title bar */
+  --titlebar-bg: rgba(255, 255, 255, 0.05);
+  --titlebar-h:  1.875rem;
 }
 
-* {
-  box-sizing: border-box;
-}
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
 
-html,
-body {
-  min-height: 100%;
+html, body {
+  height: 100%;
   margin: 0;
-  background: var(--background);
   color: var(--foreground);
 }
 
 body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  /* Warm purple/orange/blue wallpaper — always behind everything */
+  background-color: #1a0a2e;
+  background-image:
+    radial-gradient(ellipse 110% 70% at 0% 0%,   #c2410c55 0%, transparent 50%),
+    radial-gradient(ellipse 80%  60% at 100% 0%,  #7c3aed50 0%, transparent 55%),
+    radial-gradient(ellipse 70%  80% at 50%  50%, #1e1b4b   0%, transparent 80%),
+    radial-gradient(ellipse 60%  50% at 0%   100%,#9d174d40 0%, transparent 55%),
+    radial-gradient(ellipse 50%  40% at 100% 100%,#ea580c35 0%, transparent 50%);
+  background-attachment: fixed;
 }
 
-button,
-input,
-select {
-  font: inherit;
+button, input, select, textarea { font: inherit; }
+::selection { background: rgb(198 243 107 / 24%); }
+
+/* ─── Glass surface ──────────────────────────────────────────────────────── */
+.glass-surface {
+  background: var(--surface-bg);
+  backdrop-filter: blur(var(--surface-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--surface-blur)) saturate(180%);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--surface-radius);
+  box-shadow: var(--surface-shadow);
 }
 
-::selection {
-  background: rgb(198 243 107 / 24%);
+.glass-titlebar {
+  height: var(--titlebar-h);
+  background: var(--titlebar-bg);
+  border-bottom: 1px solid var(--surface-border);
+  border-radius: var(--surface-radius) var(--surface-radius) 0 0;
+  flex-shrink: 0;
 }
 
+/* ─── Solid-mode fallback ────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .glass-surface {
+    background: var(--surface-bg-solid);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+[data-solid-mode="true"] .glass-surface {
+  background: var(--surface-bg-solid);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
+
+/* ─── Transitions ────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: no-preference) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: smooth;
-    transition-property: color, background-color, border-color, opacity, transform;
-    transition-duration: 160ms;
+  *, *::before, *::after {
+    transition-property: color, background-color, border-color, opacity;
+    transition-duration: 120ms;
     transition-timing-function: ease;
   }
 }

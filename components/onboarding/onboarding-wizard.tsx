@@ -31,9 +31,6 @@ export function OnboardingWizard() {
 
   return (
     <section className="mx-auto flex min-h-[calc(100dvh-3.5rem)] w-full max-w-xl flex-col justify-center px-5 py-16">
-      <p className="mb-4 text-xs font-medium uppercase tracking-[0.18em] text-accent">
-        A little setup
-      </p>
       <h1 className="text-3xl font-semibold tracking-tight">Make this space yours.</h1>
       <p className="mt-3 max-w-md text-sm leading-6 text-muted">
         Choose a workspace name and the language you work in most. You can change

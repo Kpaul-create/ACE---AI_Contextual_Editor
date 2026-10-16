@@ -7,3 +7,10 @@ __pycache__/
 *.py[cod]
 .env*
 !.env.example
+!.env.test.example
+!.env.production.example
+
+# Browser service — cookie stores and Puppeteer user-data-dirs are sensitive
+backend/data/
+data/cookies/
+data/browser/

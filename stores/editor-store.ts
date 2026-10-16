@@ -9,5 +9,6 @@ type EditorState = {
 export const useEditorStore = create<EditorState>((set) => ({
   line: 1,
   column: 1,
-  setCursor: (line, column) => set({ line, column }),
+  setCursor: (line, column) =>
+    set((state) => (state.line === line && state.column === column ? state : { line, column })),
 }));
